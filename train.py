@@ -9,7 +9,7 @@ from preprocessing.augment_dataset import get_data, get_test
 from tensorflow.keras.callbacks import ReduceLROnPlateau
 from preprocessing.preprocess_utils import make_folder
 from model import u_net, deeplab
-os.environ["CUDA_VISIBLE_DEVICES"]="0"
+
 
 class Train:
     """ Loads dataset and trains the model
