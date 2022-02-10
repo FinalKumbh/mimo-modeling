@@ -8,18 +8,11 @@ from tensorflow.keras import backend as K
 from preprocessing.augment_dataset import get_data, get_test
 from tensorflow.keras.callbacks import ReduceLROnPlateau
 from preprocessing.preprocess_utils import make_folder
-from model import u_net, deeplab
+from model import u_net
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 class Train:
     """ Loads dataset and trains the model
-
-    :param gamma: focusing parameter for modulating factor (1 - p).
-        Defaults to 2.0.
-    :type gamma: float
-    :param alpha: similar to weighing factor in balanced cross entropy.
-        Defaults to 0.25
-    :type alpha: float
     :param num_classes: number of output classes.
     :type num_classes: int
     :param learning_rate: decay factor used during gradient descent.
@@ -35,53 +28,11 @@ class Train:
         """ Constructor method.
 
         """
-        self.gamma = 2.
-        self.alpha = 0.25
         self.num_classes = 19
         self.learning_rate = 0.001
         self.epochs = 50
         self.image_shape = (256, 256, 3)
-
-    def categorical_focal_loss(self):
-        """
-        Softmax version of focal loss.
-               m
-          FL = ∑  -alpha * (1 - p_o,c)^gamma * y_o,c * log(p_o,c)
-              c=1
-          where m = number of classes, c = class and o = observation
-        References:
-            Official paper: https://arxiv.org/pdf/1708.02002.pdf
-            https://www.tensorflow.org/api_docs/python/tf/keras/backend/categorical_crossentropy
-        Usage:
-         model.compile(loss=[categorical_focal_loss(alpha=.25, gamma=2)],
-         metrics=["accuracy"], optimizer=adam)
-        """
-
-        def categorical_focal_loss_fixed(y_true, y_pred):
-            """
-            :param y_true: A tensor of the same shape as `y_pred`
-            :param y_pred: A tensor resulting from a softmax
-            :return: Output tensor.
-            """
-            # Scale predictions so that the class probas of
-            # each sample sum to 1
-            y_pred /= K.sum(y_pred, axis=-1, keepdims=True)
-
-            # Clip the prediction value to prevent NaN's and Inf's
-            epsilon = K.epsilon()
-            y_pred = K.clip(y_pred, epsilon, 1. - epsilon)
-
-            # Calculate Cross Entropy
-            cross_entropy = -y_true * K.log(y_pred)
-
-            # Calculate Focal Loss
-            loss = self.alpha * K.pow(1 - y_pred, self.gamma) * cross_entropy
-
-            # Compute mean loss in mini_batch
-            return K.mean(loss, axis=1)
-
-        return categorical_focal_loss_fixed
-
+        
     def compute_iou(self, y_true, y_pred):
         """ Computes mIoU for a given dataset.
 
@@ -99,11 +50,13 @@ class Train:
         y_true = tf.keras.backend.flatten(y_true)
         current = tf.math.confusion_matrix(y_true, y_pred)
         # compute mean iou
+        # Returns the batched diagonal part of a batched tensor.
         intersection = tf.linalg.diag_part(current)
         ground_truth_set = tf.keras.backend.sum(current, axis=1)
         predicted_set = tf.keras.backend.sum(current, axis=0)
         union = ground_truth_set + predicted_set - intersection
         IoU = intersection / union
+        #cast into float32
         return tf.dtypes.cast(tf.keras.backend.mean(IoU), tf.float32)
 
     def mIoU(self, y_true, y_pred):
@@ -120,7 +73,7 @@ class Train:
         """
         return tf.py_function(self.compute_iou, [y_true, y_pred], tf.float32)
 
-    def train(self, model_name):
+    def train(self):
         """ Train the model and check its metrics
 
         :param model_name: train the keras model using the given datasets
@@ -128,22 +81,18 @@ class Train:
 
         """
         input_img = Input(shape=self.image_shape, name='img')
-        if model_name == 'unet':
-            model = u_net.get_u_net(input_img, num_classes=self.num_classes)
-        elif model_name == 'deeplab':
-            model = deeplab.deeplabv3_plus(num_classes=self.num_classes)
+        # unet https://www.jeremyjordan.me/semantic-segmentation/#loss
+        model = u_net.get_u_net(input_img, num_classes=self.num_classes)
         optimizer = Adam(learning_rate=self.learning_rate)
         loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False)
         model.compile(optimizer=optimizer,
                       loss=loss,
-                      # loss=[categorical_focal_loss(alpha=.25, gamma=2)],
                       metrics=['accuracy', self.mIoU])
         train_data, valid_data = get_data()
         test_data = get_test()
+        #Reduce learning rate when a metric has stopped improving.
         reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
                                       patience=5, min_lr=0.00000001)
-        early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
-                                                      patience=10)
         make_folder(os.path.join(os.path.dirname(__file__),
                                  'logs/fit'))
         log_dir = os.path.join(os.path.dirname(__file__),
@@ -166,20 +115,15 @@ class Train:
 
         MODEL_DIR = os.path.join(os.path.dirname(__file__), 'results/models/')
         make_folder(MODEL_DIR)
-        file_name = datetime.datetime.now().strftime("%m%d_%H%M") + "-" + model_name
+        file_name = datetime.datetime.now().strftime("%m%d_%H%M") + "-" + "u_net"
         model.save(os.path.join(MODEL_DIR,
                                 '{}.h5'.format(file_name)),
                    model)
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-m", "--model", type=str, required=True,
-                    choices=("unet", "deeplab"),
-                    help="type of model")
-    args = vars(ap.parse_args())
     trainer = Train()
-    trainer.train(args["model"])
+    trainer.train()
 
 
 if __name__ == '__main__':
