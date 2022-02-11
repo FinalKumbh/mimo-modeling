@@ -37,7 +37,6 @@ class Upload extends Component {
         this.setState({
             render: compName
         });
-        let file1 ='c:/Users/panse/Workspace2022/face_proj/Face_segmentation/CelebAMask-HQ/CelebA-HQ-img/1.jpg'
         const data = new FormData() 
         data.append('file', this.state.file)
         console.log(this.state.file)
@@ -83,7 +82,7 @@ class Upload extends Component {
         return (
             <div class="container-fluid">
                 <div className="page-header">
-                    <h1 className="appname">Makeup Mirror</h1>
+                    <h1 className="appname">MIMO</h1>
                 </div>
                 <div>
                     <input type="file" class="uploadbutton" onChange={this.handleChange} />
