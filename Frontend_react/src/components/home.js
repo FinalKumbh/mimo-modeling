@@ -7,7 +7,7 @@ class Home extends Component{
         return(
             <div className="container-fluid">
                 <div className="page-header">
-                    <h1 className="appname">fACES</h1>
+                    <h1 className="appname">MIMO</h1>
                 </div>
                 <div className="row">
                     <div className="col">

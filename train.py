@@ -1,14 +1,13 @@
 import os
 import datetime
-import argparse
 import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras import Input
-from tensorflow.keras import backend as K
 from preprocessing.augment_dataset import get_data, get_test
 from tensorflow.keras.callbacks import ReduceLROnPlateau
 from preprocessing.preprocess_utils import make_folder
 from model import u_net
+import numpy as np
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 class Train:
@@ -73,6 +72,40 @@ class Train:
         """
         return tf.py_function(self.compute_iou, [y_true, y_pred], tf.float32)
 
+    def SDL(self, y_true, y_pred):
+        return tf.py_function(self.soft_dice_loss, [y_true, y_pred], tf.float32)
+    
+    def soft_dice_loss(self, y_true, y_pred, epsilon=1e-6): 
+        ''' 
+        Soft dice loss calculation for arbitrary batch size, number of classes, and number of spatial dimensions.
+        Assumes the `channels_last` format.
+    
+        # Arguments
+            y_true: b x X x Y( x Z...) x c One hot encoding of ground truth
+            y_pred: b x X x Y( x Z...) x c Network output, must sum to 1 over c channel (such as after softmax) 
+            epsilon: Used for numerical stability to avoid divide by zero errors
+        
+        # References
+            V-Net: Fully Convolutional Neural Networks for Volumetric Medical Image Segmentation 
+            https://arxiv.org/abs/1606.04797
+            More details on Dice loss formulation 
+            https://mediatum.ub.tum.de/doc/1395260/1395260.pdf (page 72)
+            
+            Adapted from https://github.com/Lasagne/Recipes/issues/99#issuecomment-347775022
+        '''
+        y_pred = tf.math.argmax(y_pred, axis=-1)
+        y_pred = tf.keras.backend.flatten(y_pred)
+        y_true = tf.keras.backend.flatten(y_true)
+        # skip the batch and class axis for calculating Dice score
+        axes = tuple(range(1, len(y_pred.shape)-1)) 
+        numerator = 2. * np.sum(y_pred * y_true, axes)
+        denominator = np.sum(np.square(y_pred) + np.square(y_true), axes)
+        dice_loss = 1 - np.mean((numerator + epsilon) / (denominator + epsilon)) # average over classes and batch
+        
+        #cast into float32
+        return tf.dtypes.cast(dice_loss, tf.float32)
+        # thanks @mfernezir for catching a bug in an earlier version of this implementation!
+
     def train(self):
         """ Train the model and check its metrics
 
@@ -82,11 +115,16 @@ class Train:
         """
         input_img = Input(shape=self.image_shape, name='img')
         # unet https://www.jeremyjordan.me/semantic-segmentation/#loss
+        # https://github.com/jakeret/tf_unet
         model = u_net.get_u_net(input_img, num_classes=self.num_classes)
         optimizer = Adam(learning_rate=self.learning_rate)
-        loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False)
+        
+
+        loss = tf.keras.losses.SparseCategoricalCrossentropy()
+
+
         model.compile(optimizer=optimizer,
-                      loss=loss,
+                      loss=self.SDL,
                       metrics=['accuracy', self.mIoU])
         train_data, valid_data = get_data()
         test_data = get_test()
