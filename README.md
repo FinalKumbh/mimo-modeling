@@ -47,18 +47,14 @@ Documentation for the code
    2. Augment data. The code is present in preproprocessing/augment_dataset.py.
 
 2. __Models__  
-   This folder contains the model used in this project namely, U-Net
+   This folder contains the model used in this project U-Net.
 
 3. __train.py__ 
    
    Run the code using the below command 
                     
-         python train.py -m <model_name>
+         python train.py 
           
-   For help on available models
-   
-         python train.py --help
-
 4. __test.py__  
     This file helps in visualizing segmentation for a given test image. Usage is as follows
       
