@@ -189,6 +189,22 @@ class Options extends Component{
                     }
                     break;
                 }
+                case "brow": {
+                    if(partId == 6 || partId == 7){ 
+                        tar[j + 0] = applyColor[0];
+                        tar[j + 1] = applyColor[1];
+                        tar[j + 2] = applyColor[2];
+                        tar[j + 3] = 255;
+                    }
+                    else{
+                        tar[j + 0] = 0;
+                        tar[j + 1] = 0;
+                        tar[j + 2] = 0;
+                        tar[j + 3] = 255;
+                    }
+                    break;
+                }
+
             }
         }
         let tarInter = new ImageData(tar, 256, 256);
@@ -227,6 +243,7 @@ class Options extends Component{
                         <select className="featureSelection" value={this.state.feature} onChange={this.handleFeatureChange}>
                             <option value="lip">Lip color</option>
                             <option value="hair">Hair color</option>
+                            <option value="brow">Brow color</option>
                         </select>
                     </label>
                 </div>
