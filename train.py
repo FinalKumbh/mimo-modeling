@@ -120,7 +120,7 @@ class Train:
         optimizer = Adam(learning_rate=self.learning_rate)
         
 
-        loss = tf.keras.losses.SparseCategoricalCrossentropy()
+        loss = tf.keras.losses.SparseCategoricalCrossentropy(reduction=tf.keras.losses.Reduction.SUM)
 
 
         model.compile(optimizer=optimizer,
