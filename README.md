@@ -16,23 +16,13 @@ Configuration of Project Environment
 
 Setup procedure
 ----------------
-1. Clone project from [GitHub](https://github.com/Sanjana7395/face_segmentation.git).  
-      Change to the directory face_segmentation.
+1. Clone project 
 2. Install packages  
    In order to reproduce the code install the packages 
    
    1. Manually install packages mentioned in requirements.txt file or use the command.
 
            pip install -r requirements.txt
-
-   2. Install packages using setup.py file.
-
-            python setup.py install
-
-   The **--user** option directs setup.py to install the package
-   in the user site-packages directory for the running Python.
-   Alternatively, you can use the **--home** or **--prefix** option to install
-   your package in a different location (where you have the necessary permissions)
 
 3. Download the required data set.  
       The data set that is used in this project CelebAMask-HQ that is available
@@ -63,12 +53,8 @@ Documentation for the code
    
    Run the code using the below command 
                     
-         python train.py -m <model_name>
-          
-   For help on available models
-   
-         python train.py --help
-
+         python train.py 
+         
 4. __test.py__  
     This file helps in visualizing segmentation for a given test image. Usage is as follows
       
