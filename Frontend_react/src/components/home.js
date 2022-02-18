@@ -19,7 +19,7 @@ class Home extends Component{
                         </button>
                     </div>
                     <div className="col">
-                        //TODO
+                        Add another button for home page
                     </div>
                 </div>      
             </div>
