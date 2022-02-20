@@ -17,6 +17,9 @@ class Home extends Component{
                         <button type="button" className="btn btn-outline-light getstarted" onClick={() => history.push('/Upload')}>
                             Get Started
                         </button>
+                        <button type="button" className="btn btn-outline-light getstarted" onClick={() => history.push('/webcam')}>
+                            Webcam
+                        </button>
                     </div>
                     <div className="col">
                         Add another button for home page
