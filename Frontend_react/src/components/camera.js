@@ -2,6 +2,7 @@ import React, {useRef, useEffect, useState} from "react";
 import "./webcam.css";
 import Webcam from "react-webcam";
 import "./camera.css";
+import axios from "axios";
 
 function dataURLtoFile(dataurl, filename) {
  
@@ -25,6 +26,8 @@ function Webcam_picture() {
 	const [hasPhoto, setHasPhoto] = useState(false)
 	const [feature, setFeatureChange] = useState("lip")
 	const [color, setColor] = useState("#FF1414")
+	const [image_file, setFile] = useState(null)
+	const [image_path, setPath] = useState(null)
 
 
 
@@ -58,7 +61,30 @@ function Webcam_picture() {
 
 		var image = photo.toDataURL("image/png");
 		var file = dataURLtoFile(image,'file.png');
-		console.log(file);
+		setFile(file);
+
+		const data = new FormData();
+		data.append('file', image_file)
+		console.log(image_file)
+		axios.post('http://localhost:8000/api/v1/upload',data, {
+        })
+        .then(res => {
+			setPath(res.data.path)
+            const imgData = {
+                path: image_path
+            }
+            axios.post('http://localhost:8000/api/v1/makeup', imgData, {
+            })
+            .then(imgRes => {
+                this.setState({
+                    prediction: imgRes.data.prediction,
+                    image: imgRes.data.imageArray
+                }) 
+            })
+        })
+
+
+
 		setHasPhoto(true);
 	}
 
