@@ -116,6 +116,8 @@ class Train:
         input_img = Input(shape=self.image_shape, name='img')
         # unet https://www.jeremyjordan.me/semantic-segmentation/#loss
         # https://github.com/jakeret/tf_unet
+        # https://arxiv.org/abs/2002.12655
+        
         model = u_net.get_u_net(input_img, num_classes=self.num_classes)
         optimizer = Adam(learning_rate=self.learning_rate)
         

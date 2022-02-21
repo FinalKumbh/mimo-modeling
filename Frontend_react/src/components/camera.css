@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.Webcam_picture {
+    min-height: 100vh;
+    position: relative;
+    background-color: linear-gradient(315deg, #b3cdd1 0%, #9fa4c4 100%);
+}
+
+.camera{
+    position: relative;
+}
+
+.result{
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: blanchedalmond;
+    transition: 0.4s;
+}
+
+.result.hasPhoto {
+    left: 0;
+}
+
+video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+.button1.hasPhoto{
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+
+    appearance: none;
+    border: none;
+    outline: none;
+
+    padding: 8px 16px;
+    background-image: linear-gradient(to right, #8e44ad 50%, rgb(119, 18, 102) 50%);
+    background-position: 0%;
+    background-size: 200%;
+    color: rgb(197, 245, 245);
+    font-size: 24px;
+    font-weight: 700;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.button2.hasPhoto{
+    position: fixed;
+    bottom: 150px;
+    left: 20px;
+
+    appearance: none;
+    border:white;
+    outline: none;
+
+    padding: 8px 16px;
+    background-image: linear-gradient(to right, #8e44ad 50%, rgb(119, 18, 102) 50%);
+    background-position: 0%;
+    background-size: 200%;
+    color: rgb(197, 245, 245);
+    font-size: 24px;
+    font-weight: 700;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.button1:hover{
+    background-position:100%;
+}
+
+.button2:hover{
+    background-position:100%;
+}
+
+
+.button3{
+    position: fixed;
+    bottom: 150px;
+    left: 20px;
+
+    appearance: none;
+    border:white;
+    outline: none;
+
+    padding: 8px 16px;
+    background-image: linear-gradient(to right, #8e44ad 50%, rgb(119, 18, 102) 50%);
+    background-position: 0%;
+    background-size: 200%;
+    color: rgb(197, 245, 245);
+    font-size: 24px;
+    font-weight: 700;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+}
+
+.labels1.hasPhoto{
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    display:inline-flex;
+    vertical-align:text-bottom;
+    position:fixed;
+    bottom: 0;
+    left: 500px;
+}
+
+.labels2{
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    display:inline-flex;
+    vertical-align:text-bottom;
+    position:fixed;
+    bottom: 0;
+    left:auto;
+}

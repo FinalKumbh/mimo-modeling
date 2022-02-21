@@ -54,7 +54,6 @@ Documentation for the code
    Run the code using the below command 
                     
          python train.py 
-          
 4. __test.py__  
     This file helps in visualizing segmentation for a given test image. Usage is as follows
       
