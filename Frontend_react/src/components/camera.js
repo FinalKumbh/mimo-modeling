@@ -3,6 +3,21 @@ import "./webcam.css";
 import Webcam from "react-webcam";
 import "./camera.css";
 
+function dataURLtoFile(dataurl, filename) {
+ 
+	var arr = dataurl.split(','),
+		mime = arr[0].match(/:(.*?);/)[1],
+		bstr = atob(arr[1]), 
+		n = bstr.length, 
+		u8arr = new Uint8Array(n);
+		
+	while(n--){
+		u8arr[n] = bstr.charCodeAt(n);
+	}
+	
+	return new File([u8arr], filename, {type:mime});
+}
+
 function Webcam_picture() {
 	const videoRef = useRef(null);
 	const photoRef = useRef(null);
@@ -39,6 +54,11 @@ function Webcam_picture() {
 
 		let ctx = photo.getContext('2d')
 		ctx.drawImage(video, 0,0, width, height);
+
+
+		var image = photo.toDataURL("image/png");
+		var file = dataURLtoFile(image,'file.png');
+		console.log(file);
 		setHasPhoto(true);
 	}
 

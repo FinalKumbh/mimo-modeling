@@ -23,6 +23,7 @@ class Upload extends Component {
         let reader = new FileReader();
         let file = event.target.files[0];
         console.log('Browse image and display preview image')
+        console.log(file)
         reader.onloadend = () => {
             this.setState({
                 file: file,
