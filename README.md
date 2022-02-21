@@ -1,7 +1,7 @@
 # Face Segmentation
 
-This project parses different parts of the face using semantic segmentation. The Machine
-learning model used is U-Net.    
+This project parses different parts of the face using semantic segmentation. 
+The Machine learning model used in this project is called U-Net.    
 The experiments folder contains application of semantic segmentation i.e. to change lip
 and hair color. Refer [Github](https://github.com/Sanjana7395/face_makeup_app.git) code 
 for browser application to do the same using tensorflow.js and opencv.js.
@@ -16,7 +16,7 @@ Configuration of Project Environment
 
 Setup procedure
 ----------------
-1. Clone project 
+1. Clone project from GitHub
 2. Install packages  
    In order to reproduce the code install the packages 
    
@@ -47,14 +47,13 @@ Documentation for the code
    2. Augment data. The code is present in preproprocessing/augment_dataset.py.
 
 2. __Models__  
-   This folder contains the model used in this project namely, U-Net
+   This folder contains the model used in this project U-Net.
 
 3. __train.py__ 
    
    Run the code using the below command 
                     
          python train.py 
-         
 4. __test.py__  
     This file helps in visualizing segmentation for a given test image. Usage is as follows
       
