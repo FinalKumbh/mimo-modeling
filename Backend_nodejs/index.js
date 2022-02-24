@@ -42,7 +42,26 @@ var upload = multer({storage: storage, fileFilter: helpers.imageFilter}).single(
 //    });
 // });
 
+// var mysql = require('mysql');
+// var conn = mysql.createConnection({
+//   host: 'localhost', // Replace with your host name
+//   user: 'root',      // Replace with your database username
+//   password: '',      // Replace with your database password
+//   database: 'my-node' // // Replace with your database Name
+// }); 
+// conn.connect(function(err) {
+//   if (err) throw err;
+//   console.log('Database is connected successfully !');
+// });
+// module.exports = conn;
 
+// var express = require('express');
+// var path = require('path');
+// var cors = require('cors');
+// var bodyParser = require('body-parser');
+// var multer = require('multer')
+// var db=require('./database');
+// var app = express();
 // Read the image to be segmented
 const readImage = path => {     
   const imageBuffer = fs.readFileSync(path);     
