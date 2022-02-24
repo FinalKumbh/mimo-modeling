@@ -47,6 +47,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Image is read and passed through the segmentation model
 // Response contains the segmentation mask of the image and the image itself
 app.post('/api/v1/makeup', (req, res) => {
+    console.log(req.body)
     if(!req.body.path) {
       return res.status(400).send({
         success: 'false',
@@ -64,6 +65,7 @@ app.post('/api/v1/makeup', (req, res) => {
       // Normalize the image and return the result
       const imageInput =  tf.tidy(() => {
         var inter = readImage(path.join('./', imgLoc)).expandDims();
+        console.log(inter.shape)
         const result = tf.image.resizeBilinear(inter, [256,256]).div(a);
         return result
       }); 
@@ -75,6 +77,7 @@ app.post('/api/v1/makeup', (req, res) => {
         return result;
       })
       // Predicting the segmentation mask
+      console.log((imageInput))
       const prediction = result.predict(imageInput).argMax(axis=-1);
 
       const out = Array.from(prediction.dataSync());
