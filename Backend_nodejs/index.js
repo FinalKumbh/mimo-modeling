@@ -30,6 +30,19 @@ var storage = multer.diskStorage({
 })
 var upload = multer({storage: storage, fileFilter: helpers.imageFilter}).single('file')
 
+// handle single file upload
+// app.post('/api/v1/upload', upload.single('dataFile'), (req, res, next) => {
+//   const file = req.file;
+//   if (!file) {
+//      return res.status(400).send({ message: 'Please upload a file.' });
+//   }
+//   var sql = "INSERT INTO `file`(`name`) VALUES ('" + req.file.filename + "')";
+//   var query = db.query(sql, function(err, result) {
+//       return res.send({ message: 'File is successfully.', file });
+//    });
+// });
+
+
 // Read the image to be segmented
 const readImage = path => {     
   const imageBuffer = fs.readFileSync(path);     
