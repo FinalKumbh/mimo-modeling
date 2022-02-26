@@ -5,6 +5,8 @@ import "./camera.css";
 import axios from "axios";
 /*global cv*/
 
+
+
 function dataURLtoFile(dataurl, filename) {
  
     // convert base64 to raw binary data held in a string
@@ -73,31 +75,33 @@ function Webcam_picture() {
 		setFile(file);
 		setHasPhoto(true);
 	}
-
-	const Upload_photo = event => {
+	//code here to change the state
+	const Upload_photo = () => {
 		//event.preventDefault();
 		const data = new FormData();
 		data.append('file', image_file)
 		console.log(image_file)
 		axios.post('http://localhost:8000/api/v1/upload',data, {
         })
-        .then(res => {
-			console.log(res.data.path)
-			setPath(res.data.path)
-			console.log(res.data.path)
-            const imgData = {
-                path: image_path
-            }
-            axios.post('http://localhost:8000/api/v1/makeup', imgData, {
-            })
-            .then(imgRes => {
-				console.log("imgRes.data.prediction")
-
-				setPrediction(imgRes.data.prediction);
-				setImage(imgRes.data.imageArray)
-            })
+        .then(res => {getImageData(res)
         })
 	}
+	const getImageData = res => {
+		setPath(res.data.path)
+		console.log(image_path)
+		const imgData = {
+			path: image_path
+		}
+		axios.post('http://localhost:8000/api/v1/makeup', imgData, {
+		})
+		.then(imgRes => {
+			console.log("imgRes.data.prediction")
+
+			setPrediction(imgRes.data.prediction);
+			setImage(imgRes.data.imageArray)
+		})
+	}
+
 
 	const ApplyHandler = () => {
 		const hexToRgb = hex =>
