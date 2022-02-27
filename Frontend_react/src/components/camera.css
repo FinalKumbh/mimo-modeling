@@ -77,11 +77,35 @@ video {
     cursor: pointer;
 }
 
+.button4.hasPhoto{
+    position: fixed;
+    bottom: 200px;
+    left: 20px;
+
+    appearance: none;
+    border:white;
+    outline: none;
+
+    padding: 8px 16px;
+    background-image: linear-gradient(to right, #8e44ad 50%, rgb(119, 18, 102) 50%);
+    background-position: 0%;
+    background-size: 200%;
+    color: rgb(197, 245, 245);
+    font-size: 24px;
+    font-weight: 700;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
 .button1:hover{
     background-position:100%;
 }
 
 .button2:hover{
+    background-position:100%;
+}
+
+.button4:hover{
     background-position:100%;
 }
 
