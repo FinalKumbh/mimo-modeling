@@ -32,13 +32,13 @@ Setup procedure
     Download the semantic segmentation tensorflow.js web model from 
     [here](https://drive.google.com/drive/folders/1NidAqPT3aVBm54_KRTcbZBcvls98q18L?usp=sharing)
 
-4. Run the project in development mode.(Use --npm install -g nodemon-- to install nodemon)
-   To install nodemon
+4. Run the project in development mode.(Use --npm install -g nodemon-- to install nodemon)  
+   To install nodemon  
         npm i nodemon -g  
-        npm install --save-dev nodemon 
-        
-   Run nodemon      
-        nodemon index.js
+        npm install --save-dev nodemon   
+          
+   Run nodemon        
+        nodemon index.js  
 
     With nodemon the project will reload if you make edits.
       
