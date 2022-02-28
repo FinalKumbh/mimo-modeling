@@ -83,24 +83,22 @@ function Webcam_picture() {
 		console.log(image_file)
 		axios.post('http://localhost:8000/api/v1/upload',data, {
         })
-        .then(res => {getImageData(res)
+        .then(res => {setPath(res.data.path)
         })
 	}
-	const getImageData = res => {
-		setPath(res.data.path)
-		console.log(image_path)
+
+	useEffect(() => {
 		const imgData = {
-			path: image_path
+		  path: image_path
 		}
 		axios.post('http://localhost:8000/api/v1/makeup', imgData, {
 		})
 		.then(imgRes => {
-			console.log("imgRes.data.prediction")
-
-			setPrediction(imgRes.data.prediction);
-			setImage(imgRes.data.imageArray)
+		  console.log("imgRes.data.prediction")
+		  setPrediction(imgRes.data.prediction);
+		  setImage(imgRes.data.imageArray)
 		})
-	}
+	  }, [image_path])
 
 
 	const ApplyHandler = () => {
