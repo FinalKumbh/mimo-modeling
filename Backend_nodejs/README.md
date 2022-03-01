@@ -6,14 +6,14 @@ For more on tensorflow.js refer [https://www.tensorflow.org/js/tutorials](https:
 
 Setup procedure
 ----------------
-1. In the command prompt move into the face_backend folder in this project.
+### 1. In the command prompt move into the face_backend folder in this project.
 
-2. Install packages  
+### 2. Install packages  
    In order to reproduce the code install the  npm packages 
    
         npm install
 
-3. Add your model in helpers/tfjs_model.
+### 3. Add your model in helpers/tfjs_model.
     1. In the neural network project (See this [Github](https://github.com/Sanjana7395/Face_segmentation.git) project), 
     where the model is trained and saved or in an isolated python environment(created using pipenv or
     virtualenv) install the convertor by running the following command.
@@ -32,9 +32,9 @@ Setup procedure
     Download the semantic segmentation tensorflow.js web model from 
     [here](https://drive.google.com/drive/folders/1NidAqPT3aVBm54_KRTcbZBcvls98q18L?usp=sharing)
     
-4. Make A folder called uploads in the backend directory.
+### 4. Make A folder called uploads in the backend directory.
 
-5. Run the project in development mode.(Use --npm install -g nodemon-- to install nodemon)  
+### 5. Run the project in development mode.(Use --npm install -g nodemon-- to install nodemon)  
    
             nodemon index.js  
 
