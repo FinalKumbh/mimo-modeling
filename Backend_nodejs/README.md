@@ -14,23 +14,23 @@ Setup procedure
         npm install
 
 ### 3. Add your model in helpers/tfjs_model.
-    1. In the neural network project (See this [Github](https://github.com/Sanjana7395/Face_segmentation.git) project), 
-    where the model is trained and saved or in an isolated python environment(created using pipenv or
-    virtualenv) install the convertor by running the following command.
-            
-            pip install tensorflowjs
+       1. In the neural network project (See this [Github](https://github.com/Sanjana7395/Face_segmentation.git) project), 
+       where the model is trained and saved or in an isolated python environment(created using pipenv or
+       virtualenv) install the convertor by running the following command.
 
-    2. Convert the existing tensorflow model to tensorflow.js web format.
+               pip install tensorflowjs
 
-            tensorflowjs_converter /source/saved_model/path /destination/face_ackend/helpers/tfjs_model
+       2. Convert the existing tensorflow model to tensorflow.js web format.
 
-    For further details on importing a tensorflow GraphDef model to a tensorflow.js model click 
-    [here](https://www.tensorflow.org/js/tutorials/conversion/import_saved_model).
+               tensorflowjs_converter /source/saved_model/path /destination/face_ackend/helpers/tfjs_model
 
-    [OR]
+       For further details on importing a tensorflow GraphDef model to a tensorflow.js model click 
+       [here](https://www.tensorflow.org/js/tutorials/conversion/import_saved_model).
 
-    Download the semantic segmentation tensorflow.js web model from 
-    [here](https://drive.google.com/drive/folders/1NidAqPT3aVBm54_KRTcbZBcvls98q18L?usp=sharing)
+       [OR]
+
+       Download the semantic segmentation tensorflow.js web model from 
+       [here](https://drive.google.com/drive/folders/1NidAqPT3aVBm54_KRTcbZBcvls98q18L?usp=sharing)
     
 ### 4. Make A folder called uploads in the backend directory.
 
