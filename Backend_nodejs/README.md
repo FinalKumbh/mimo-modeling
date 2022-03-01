@@ -31,8 +31,10 @@ Setup procedure
 
     Download the semantic segmentation tensorflow.js web model from 
     [here](https://drive.google.com/drive/folders/1NidAqPT3aVBm54_KRTcbZBcvls98q18L?usp=sharing)
+    
+4. Make A folder called uploads in the backend directory.
 
-4. Run the project in development mode.(Use --npm install -g nodemon-- to install nodemon)  
+5. Run the project in development mode.(Use --npm install -g nodemon-- to install nodemon)  
    
             nodemon index.js  
 
