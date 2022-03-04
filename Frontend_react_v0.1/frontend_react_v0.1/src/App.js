@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Camera, Footer, Header, Main} from './container';
-import { Navbar } from './components';
+import { Navbar } from './components'
 
 import './App.scss'
 
