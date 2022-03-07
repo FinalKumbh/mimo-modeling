@@ -95,7 +95,7 @@
     svg {
         width: 70%;
         height: 70%;
-        color: (--white-color);
+        color: var(--white-color);
     }
 
     div {
@@ -125,7 +125,7 @@
         svg {
             width: 35px;
             height: 35px;
-            color: (--secondary-color);
+            color: var(--secondary-color);
             margin: 0.5rem 1rem;
         }
 
