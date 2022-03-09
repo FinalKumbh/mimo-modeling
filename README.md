@@ -86,7 +86,8 @@ Semantic segmentation은 이미지의 각 픽셀에 해당 클래스에 레이�
 U-Net을 사용 하였다. 
 U-Net은 Biomedical 분야에서 이미지 분할(Image Segmentation)을 목적으로 제안된 End-to-End 방식의 Fully-Convolutional Network 기반 모델로 자율주행 과 의료 영상 진단 등에 많이 쓰이며 대중적으로 성장했고 다양한 분할 문제에 맞게 조정되고 있다
 
-![image](https://user-images.githubusercontent.com/88238335/157469375-7b112747-cdc8-4be1-a608-e8ba391afecd.png)
+![image](https://user-images.githubusercontent.com/88238335/157469684-c5c21b3d-a0b6-473e-ae3f-4058dea11491.png)
+
 
 
 U-Net의 장점
