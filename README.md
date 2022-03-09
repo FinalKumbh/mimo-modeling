@@ -3,8 +3,7 @@
 This project parses different parts of the face using semantic segmentation. 
 The Machine learning model used in this project is called U-Net.    
 The experiments folder contains application of semantic segmentation i.e. to change lip
-and hair color. Refer [Github](https://github.com/Sanjana7395/face_makeup_app.git) code 
-for browser application to do the same using tensorflow.js and opencv.js.
+and hair color.
 
 Configuration of Project Environment
 =====================================
@@ -29,7 +28,7 @@ Setup procedure
       [here](https://github.com/switchablenorms/CelebAMask-HQ).
 
 4. Run the project.  
-      See **Documentation for the code** section for further details.
+     
       
 Documentation for the code
 ===========================
@@ -79,4 +78,4 @@ Below are the results obtained on the test set for the models trained in the pro
 
 | Models                           | Accuracy (%)  | mIoU (%)  |
 |----------------------------------|:-------------:|:---------:|
-| U Net                            | 93.13         | 60.90     |
+| U Net                            | 91.13         | 60.90     |
