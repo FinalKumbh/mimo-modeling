@@ -81,8 +81,7 @@ Below are the results obtained on the test set for the models trained in the pro
 ============
 # Dataset, 전처리
 
-## CelebAMask-HQ 30,000장 얼굴 데이터를 수집 하여 training, test 수행
-
+ - CelebAMask-HQ 30,000장 얼굴 데이터를 수집 하여 training, test 수행
  - Input image(사람 얼굴 사진) 별 입술, 머리, 눈썹(왼쪽, 오른쪽), 눈(왼쪽, 오른쪽), 코, 등을 segmentation 한 ground truth 이미지를 함께 수집 함
  - train, validation , test set 은 7:2:1 비율
  - 원본 이미지와 ground truth 이미지는 U-net으로 train 시킴
