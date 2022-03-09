@@ -32,9 +32,19 @@
 }
 
 video {
-    width: 100%;
-    max-width: 100%;
+    width: 1000px;
+    max-width: 1000px;
     height: auto;
+    width: auto;
+    flex: 1;
+}
+
+canvas {
+    width: 1000px;
+    max-width: 1000px;
+    height: auto;
+    width: auto;
+    flex: 1;
 }
 
 .button1.hasPhoto{
