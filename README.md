@@ -98,3 +98,23 @@ U-Net의 장점
    Olaf Ronneberger et al., “U-Net: Convolutional Networks for Biomedical Image Segmentation”, arXiv:1505.04597v1 [cs.CV], 18 May 2015, p.2
    Edgar Schönfeld et al., “ A U-Net Based Discriminator for Generative Adversarial Networks”,  CVPR 2020, 19 Mar 2021.
 
+
+
+# 개선 방안
+## SparseCategoricalCrossentropy→ Dice-Loss 적용
+Dice-Loss 장점:  임계값을 지정하고, 이진 마스크로 변환 하는 대신 예측과 확률을 직접 사용하여 성능이 우수함.
+Dice-Loss 적용 시도 했으나, tensor shape issue로 추후 다시 적용 예정
+
+![image](https://user-images.githubusercontent.com/88238335/157472221-d953b60d-a5a7-4bef-bce4-ca593bb392ec.png)
+
+## mIoU(Mean Intersection over union, %) : 
+- Segmentation과 Object detection에서 가장 빈번하게 사용되는 성능척도
+- (교집합 영역 넓이 / 합집합 영역 넓이) 에 대한 평균값
+
+![image](https://user-images.githubusercontent.com/88238335/157472315-2e1527a7-66a7-4c04-b359-f0d9eb54d0c1.png)
+
+# 시연 동영상
+
+https://www.youtube.com/watch?v=HsdFs3KV4qA
+
+
