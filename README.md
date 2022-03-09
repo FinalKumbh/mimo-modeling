@@ -76,3 +76,24 @@ Below are the results obtained on the test set for the models trained in the pro
 | Models                           | Accuracy (%)  | mIoU (%)  |
 |----------------------------------|:-------------:|:---------:|
 | U Net                            | 91.13         | 60.90     |
+
+프로젝트 결과
+============
+
+# U-Net 
+
+Semantic segmentation은 이미지의 각 픽셀에 해당 클래스에 레이블을 지정하는 분류 작업으로 이를 위해
+U-Net을 사용 하였다. 
+U-Net은 Biomedical 분야에서 이미지 분할(Image Segmentation)을 목적으로 제안된 End-to-End 방식의 Fully-Convolutional Network 기반 모델로 자율주행 과 의료 영상 진단 등에 많이 쓰이며 대중적으로 성장했고 다양한 분할 문제에 맞게 조정되고 있다
+
+![image](https://user-images.githubusercontent.com/88238335/157469375-7b112747-cdc8-4be1-a608-e8ba391afecd.png)
+
+
+U-Net의 장점
+적은 양의 학습 데이터로도 Data Augmentation을 활용해 여러 Biomedical Image Segmentation 문제에서 우수한 성능을 보임
+컨텍스트 정보를 잘 사용하면서도 정확히 지역화함
+
+   [참고 문헌]
+   Olaf Ronneberger et al., “U-Net: Convolutional Networks for Biomedical Image Segmentation”, arXiv:1505.04597v1 [cs.CV], 18 May 2015, p.2
+   Edgar Schönfeld et al., “ A U-Net Based Discriminator for Generative Adversarial Networks”,  CVPR 2020, 19 Mar 2021.
+
